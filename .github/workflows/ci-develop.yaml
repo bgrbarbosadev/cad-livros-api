@@ -34,7 +34,7 @@ jobs:
           DATASOURCE_PASSWORD: ""
           JWT_SECRET: "minhachavesecreta@123"
           WITH_ISSUER: "myapp"
-        run: mvn verify sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: mvn verify sonar:sonar -Psonar-cloud -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Configurar Credenciais AWS
         if: github.ref == 'refs/heads/main'
