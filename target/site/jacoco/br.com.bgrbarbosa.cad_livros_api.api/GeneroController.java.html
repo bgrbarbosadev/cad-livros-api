@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeneroController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cad-livros-api</a> &gt; <a href="index.source.html" class="el_package">br.com.bgrbarbosa.cad_livros_api.api</a> &gt; <span class="el_source">GeneroController.java</span></div><h1>GeneroController.java</h1><pre class="source lang-java linenums">package br.com.bgrbarbosa.cad_livros_api.api;
+
+import br.com.bgrbarbosa.cad_livros_api.api.dto.GeneroDTO;
+import br.com.bgrbarbosa.cad_livros_api.api.mapper.GeneroMapper;
+import br.com.bgrbarbosa.cad_livros_api.business.GeneroService;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Genero;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.exceptions.ResourceNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+import java.util.UUID;
+
+
+@RestController
+@RequestMapping(value = &quot;/api/v1/genero&quot;)
+<span class="fc" id="L31">@RequiredArgsConstructor</span>
+@Tag(name = &quot;Genero&quot;, description = &quot;Contém as operações para controle de cadastro de genero.&quot;)
+public class GeneroController {
+
+	private final GeneroService service;
+	private final GeneroMapper mapper;
+
+	@GetMapping
+	@Operation(
+			summary = &quot;Listar todos os generos&quot;,
+			description = &quot;Listar todos os generos cadastrados&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;200&quot;, description = &quot;Lista todos os generos cadastrados&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;))
+			})
+	@PreAuthorize(&quot;hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')&quot;)
+	public ResponseEntity&lt;Page&lt;GeneroDTO&gt;&gt; findAll(
+			@PageableDefault(page = 0, size = 10, sort = &quot;uuid&quot;, direction = Sort.Direction.ASC) Pageable page){
+
+<span class="fc" id="L50">		List&lt;GeneroDTO&gt; listDTO = mapper.parseToListDTO(service.findAll());</span>
+<span class="fc" id="L51">		Page&lt;GeneroDTO&gt; pageDTO = mapper.toPageDTO(listDTO, page);</span>
+<span class="fc" id="L52">		return ResponseEntity.ok(pageDTO);</span>
+	}
+
+	@GetMapping(value = &quot;/{id}&quot;)
+	@Operation(summary = &quot;Recuperar um genero pelo id&quot;, description = &quot;Recuperar uma genero pelo id&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;200&quot;, description = &quot;Genero recuperado com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = GeneroDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Genero não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')&quot;)
+	public ResponseEntity&lt;GeneroDTO&gt; findById(@PathVariable UUID id) {
+<span class="fc" id="L65">		GeneroDTO dto = mapper.parseToDto(service.findById(id));</span>
+<span class="fc" id="L66">		return ResponseEntity.ok().body(dto);</span>
+	}
+
+	@PostMapping
+	@Operation(summary = &quot;Cadastra uma novo genero&quot;, description = &quot;Recurso para cadastrar generos&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;201&quot;, description = &quot;Genero cadastrada com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = GeneroDTO.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;GeneroDTO&gt; insert(@RequestBody @Valid GeneroDTO dto) {
+<span class="fc" id="L77">		Genero result = service.insert(mapper.parseToEntity(dto));</span>
+<span class="fc" id="L78">		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path(&quot;/{id}&quot;)</span>
+<span class="fc" id="L79">				.buildAndExpand(result.getIdGenero()).toUri();</span>
+<span class="fc" id="L80">		return ResponseEntity.created(uri).body(mapper.parseToDto(result));</span>
+	}
+
+	@PutMapping
+	@Operation(summary = &quot;Atualizar genero&quot;, description = &quot;Atualizar registro de genero&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;204&quot;, description = &quot;Genero atualizado com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = GeneroDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Genero não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;GeneroDTO&gt; update(@RequestBody @Valid GeneroDTO dto) {
+<span class="fc" id="L93">		Genero result = service.update(mapper.parseToEntity(dto));</span>
+<span class="fc" id="L94">		return ResponseEntity.ok().body(mapper.parseToDto(result));</span>
+	}
+
+	@DeleteMapping(value = &quot;/{id}&quot;)
+	@Operation(summary = &quot;Deleção de genero&quot;, description = &quot;Deletar uma genero pelo ID&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;202&quot;, description = &quot;Genero deletadao com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = GeneroDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Genero não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;Void&gt; delete(@PathVariable UUID id) {
+<span class="fc" id="L107">		service.delete(id);</span>
+<span class="fc" id="L108">		return ResponseEntity.noContent().build();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
