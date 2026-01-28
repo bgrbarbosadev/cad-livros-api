@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EditoraMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cad-livros-api</a> &gt; <a href="index.source.html" class="el_package">br.com.bgrbarbosa.cad_livros_api.api.mapper</a> &gt; <span class="el_source">EditoraMapperImpl.java</span></div><h1>EditoraMapperImpl.java</h1><pre class="source lang-java linenums">package br.com.bgrbarbosa.cad_livros_api.api.mapper;
+
+import br.com.bgrbarbosa.cad_livros_api.api.dto.EditoraDTO;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Editora;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Livro;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2026-01-28T14:29:37-0300&quot;,
+    comments = &quot;version: 1.6.0, compiler: javac, environment: Java 21.0.9 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L18">public class EditoraMapperImpl implements EditoraMapper {</span>
+
+    @Override
+    public Editora parseToEntity(EditoraDTO dto) {
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if ( dto == null ) {</span>
+<span class="nc" id="L23">            return null;</span>
+        }
+
+<span class="fc" id="L26">        Editora editora = new Editora();</span>
+
+<span class="fc" id="L28">        editora.setIdEditora( dto.idEditora() );</span>
+<span class="fc" id="L29">        editora.setCnpjEditora( dto.cnpjEditora() );</span>
+<span class="fc" id="L30">        editora.setRazaoSocialEditora( dto.razaoSocialEditora() );</span>
+<span class="fc" id="L31">        editora.setTelEditora( dto.telEditora() );</span>
+<span class="fc" id="L32">        List&lt;Livro&gt; list = dto.livros();</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L34">            editora.setLivros( new ArrayList&lt;Livro&gt;( list ) );</span>
+        }
+
+<span class="fc" id="L37">        return editora;</span>
+    }
+
+    @Override
+    public EditoraDTO parseToDto(Editora entity) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if ( entity == null ) {</span>
+<span class="nc" id="L43">            return null;</span>
+        }
+
+<span class="fc" id="L46">        UUID idEditora = null;</span>
+<span class="fc" id="L47">        String cnpjEditora = null;</span>
+<span class="fc" id="L48">        String razaoSocialEditora = null;</span>
+<span class="fc" id="L49">        String telEditora = null;</span>
+<span class="fc" id="L50">        List&lt;Livro&gt; livros = null;</span>
+
+<span class="fc" id="L52">        idEditora = entity.getIdEditora();</span>
+<span class="fc" id="L53">        cnpjEditora = entity.getCnpjEditora();</span>
+<span class="fc" id="L54">        razaoSocialEditora = entity.getRazaoSocialEditora();</span>
+<span class="fc" id="L55">        telEditora = entity.getTelEditora();</span>
+<span class="fc" id="L56">        List&lt;Livro&gt; list = entity.getLivros();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if ( list != null ) {</span>
+<span class="fc" id="L58">            livros = new ArrayList&lt;Livro&gt;( list );</span>
+        }
+
+<span class="fc" id="L61">        EditoraDTO editoraDTO = new EditoraDTO( idEditora, cnpjEditora, razaoSocialEditora, telEditora, livros );</span>
+
+<span class="fc" id="L63">        return editoraDTO;</span>
+    }
+
+    @Override
+    public List&lt;EditoraDTO&gt; parseToListDTO(List&lt;Editora&gt; list) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L69">            return null;</span>
+        }
+
+<span class="fc" id="L72">        List&lt;EditoraDTO&gt; list1 = new ArrayList&lt;EditoraDTO&gt;( list.size() );</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        for ( Editora editora : list ) {</span>
+<span class="fc" id="L74">            list1.add( parseToDto( editora ) );</span>
+<span class="fc" id="L75">        }</span>
+
+<span class="fc" id="L77">        return list1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

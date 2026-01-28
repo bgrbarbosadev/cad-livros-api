@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AutorMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cad-livros-api</a> &gt; <a href="index.source.html" class="el_package">br.com.bgrbarbosa.cad_livros_api.api.mapper</a> &gt; <span class="el_source">AutorMapperImpl.java</span></div><h1>AutorMapperImpl.java</h1><pre class="source lang-java linenums">package br.com.bgrbarbosa.cad_livros_api.api.mapper;
+
+import br.com.bgrbarbosa.cad_livros_api.api.dto.AutorDTO;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Autor;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Livro;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2026-01-28T14:29:37-0300&quot;,
+    comments = &quot;version: 1.6.0, compiler: javac, environment: Java 21.0.9 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L19">public class AutorMapperImpl implements AutorMapper {</span>
+
+    @Override
+    public Autor parseToEntity(AutorDTO dto) {
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if ( dto == null ) {</span>
+<span class="nc" id="L24">            return null;</span>
+        }
+
+<span class="fc" id="L27">        Autor autor = new Autor();</span>
+
+<span class="fc" id="L29">        autor.setIdAutor( dto.idAutor() );</span>
+<span class="fc" id="L30">        autor.setNameAutor( dto.nameAutor() );</span>
+<span class="fc" id="L31">        autor.setBiografiaAutor( dto.biografiaAutor() );</span>
+<span class="fc" id="L32">        autor.setDtNascAutor( dto.dtNascAutor() );</span>
+<span class="fc" id="L33">        autor.setNacionalidadeAutor( dto.nacionalidadeAutor() );</span>
+<span class="fc" id="L34">        autor.setFotoAutor( dto.fotoAutor() );</span>
+<span class="fc" id="L35">        List&lt;Livro&gt; list = dto.livros();</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L37">            autor.setLivros( new ArrayList&lt;Livro&gt;( list ) );</span>
+        }
+
+<span class="fc" id="L40">        return autor;</span>
+    }
+
+    @Override
+    public AutorDTO parseToDto(Autor entity) {
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if ( entity == null ) {</span>
+<span class="nc" id="L46">            return null;</span>
+        }
+
+<span class="fc" id="L49">        UUID idAutor = null;</span>
+<span class="fc" id="L50">        String nameAutor = null;</span>
+<span class="fc" id="L51">        String biografiaAutor = null;</span>
+<span class="fc" id="L52">        LocalDate dtNascAutor = null;</span>
+<span class="fc" id="L53">        String nacionalidadeAutor = null;</span>
+<span class="fc" id="L54">        String fotoAutor = null;</span>
+<span class="fc" id="L55">        List&lt;Livro&gt; livros = null;</span>
+
+<span class="fc" id="L57">        idAutor = entity.getIdAutor();</span>
+<span class="fc" id="L58">        nameAutor = entity.getNameAutor();</span>
+<span class="fc" id="L59">        biografiaAutor = entity.getBiografiaAutor();</span>
+<span class="fc" id="L60">        dtNascAutor = entity.getDtNascAutor();</span>
+<span class="fc" id="L61">        nacionalidadeAutor = entity.getNacionalidadeAutor();</span>
+<span class="fc" id="L62">        fotoAutor = entity.getFotoAutor();</span>
+<span class="fc" id="L63">        List&lt;Livro&gt; list = entity.getLivros();</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if ( list != null ) {</span>
+<span class="fc" id="L65">            livros = new ArrayList&lt;Livro&gt;( list );</span>
+        }
+
+<span class="fc" id="L68">        AutorDTO autorDTO = new AutorDTO( idAutor, nameAutor, biografiaAutor, dtNascAutor, nacionalidadeAutor, fotoAutor, livros );</span>
+
+<span class="fc" id="L70">        return autorDTO;</span>
+    }
+
+    @Override
+    public List&lt;AutorDTO&gt; parseToListDTO(List&lt;Autor&gt; list) {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L76">            return null;</span>
+        }
+
+<span class="fc" id="L79">        List&lt;AutorDTO&gt; list1 = new ArrayList&lt;AutorDTO&gt;( list.size() );</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for ( Autor autor : list ) {</span>
+<span class="fc" id="L81">            list1.add( parseToDto( autor ) );</span>
+<span class="fc" id="L82">        }</span>
+
+<span class="fc" id="L84">        return list1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

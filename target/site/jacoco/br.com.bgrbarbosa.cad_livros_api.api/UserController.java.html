@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cad-livros-api</a> &gt; <a href="index.source.html" class="el_package">br.com.bgrbarbosa.cad_livros_api.api</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package br.com.bgrbarbosa.cad_livros_api.api;
+
+import br.com.bgrbarbosa.cad_livros_api.api.dto.UserDTO;
+import br.com.bgrbarbosa.cad_livros_api.api.mapper.UserMapper;
+import br.com.bgrbarbosa.cad_livros_api.business.UserService;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.User;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.exceptions.ResourceNotFoundException;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.exceptions.UserException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+import java.util.UUID;
+
+
+@RestController
+@RequestMapping(value = &quot;/api/v1/user&quot;)
+<span class="fc" id="L32">@RequiredArgsConstructor</span>
+@Tag(name = &quot;Usuario&quot;, description = &quot;Contém as operações para controle de cadastro de usuários.&quot;)
+public class UserController {
+
+	private final UserService service;
+	private final UserMapper mapper;
+
+	@GetMapping
+	@Operation(
+			summary = &quot;Listar todos os usuários&quot;,
+			description = &quot;Listar todos os usuários cadastrados&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;200&quot;, description = &quot;Lista todos os usuários cadastrados&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;Page&lt;UserDTO&gt;&gt; findAll(
+			@PageableDefault(page = 0, size = 10, sort = &quot;uuid&quot;, direction = Sort.Direction.ASC) Pageable page){
+
+<span class="fc" id="L51">		List&lt;UserDTO&gt; listDTO = mapper.parseToListDTO(service.findAll(page));</span>
+<span class="fc" id="L52">		Page&lt;UserDTO&gt; pageDTO = mapper.toPageDTO(listDTO, page);</span>
+<span class="fc" id="L53">		return ResponseEntity.ok(pageDTO);</span>
+	}
+
+	@GetMapping(value = &quot;/{id}&quot;)
+	@Operation(summary = &quot;Recuperar um usuario pelo id&quot;, description = &quot;Recuperar um usuario pelo id&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;200&quot;, description = &quot;Usuario recuperado com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Usuario não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;UserDTO&gt; findById(@PathVariable UUID id) {
+<span class="fc" id="L66">		UserDTO dto = mapper.parseToDto(service.findById(id));</span>
+<span class="fc" id="L67">		return ResponseEntity.ok().body(dto);</span>
+	}
+
+	@PostMapping
+	@Operation(summary = &quot;Cadastra uma novo usuario&quot;, description = &quot;Recurso para cadastrar usuarios&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;201&quot;, description = &quot;Usuario cadastrada com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDTO.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;UserDTO&gt; insert(@RequestBody @Valid UserDTO dto) throws UserException {
+<span class="fc" id="L78">		User result = service.insert(mapper.parseToEntity(dto));</span>
+<span class="fc" id="L79">		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path(&quot;/{id}&quot;)</span>
+<span class="fc" id="L80">				.buildAndExpand(result.getUuid()).toUri();</span>
+<span class="fc" id="L81">		return ResponseEntity.created(uri).body(mapper.parseToDto(result));</span>
+	}
+
+	@PutMapping
+	@Operation(summary = &quot;Atualizar usuario&quot;, description = &quot;Atualizar registro de usuario&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;204&quot;, description = &quot;Usuario atualizado com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Usuario não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;UserDTO&gt; update(@RequestBody @Valid UserDTO dto) {
+<span class="fc" id="L94">		User result = service.update(mapper.parseToEntity(dto));</span>
+<span class="fc" id="L95">		return ResponseEntity.ok().body(mapper.parseToDto(result));</span>
+	}
+
+	@DeleteMapping(value = &quot;/{id}&quot;)
+	@Operation(summary = &quot;Deleção de usuario&quot;, description = &quot;Deletar um usuario pelo ID&quot;,
+			responses = {
+					@ApiResponse(responseCode = &quot;202&quot;, description = &quot;Usuario deletadao com sucesso&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = UserDTO.class))),
+					@ApiResponse(responseCode = &quot;404&quot;, description = &quot;Usuario não encontrado&quot;,
+							content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = ResourceNotFoundException.class)))
+			})
+	@PreAuthorize(&quot;hasAuthority('ROLE_ADMIN')&quot;)
+	public ResponseEntity&lt;Void&gt; delete(@PathVariable UUID id) {
+<span class="fc" id="L108">		service.delete(id);</span>
+<span class="fc" id="L109">		return ResponseEntity.noContent().build();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

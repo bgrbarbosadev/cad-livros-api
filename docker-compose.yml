@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: data_base_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: cad-livros
+    networks:
+      - my-network
+
+  cad-livros-api:
+    image: cadlivrosapi.azurecr.io/cadlivrosapi:${IMAGE_TAG:-latest}
+    container_name: cad-livros-api
+    depends_on:
+      - postgres-db
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/cad-livros
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: example
+      WEBSITES_PORT: 8080
+      JWT_SECRET: mysecretkey
+      WITH_ISSUER: myapp
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
