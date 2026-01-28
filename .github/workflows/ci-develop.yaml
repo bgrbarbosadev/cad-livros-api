@@ -19,11 +19,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-#      - name: Rodar análise de vulnerabilidade com OWASP
-#        if: github.ref == 'refs/heads/homologacao'
-#        env:
-#          OWASP_NVD_KEY: ${{ secrets.OWASP_NVD_KEY }}
-#        run: mvn clean install -Powasp -DskipTests -Dowasp.key=${{ secrets.OWASP_NVD_KEY }}
+      - name: Rodar análise de vulnerabilidade com OWASP
+        if: github.ref == 'refs/heads/homologacao'
+        env:
+          OWASP_NVD_KEY: ${{ secrets.OWASP_NVD_KEY }}
+        run: mvn clean install -Powasp -DskipTests -Dowasp.key=${{ secrets.OWASP_NVD_KEY }}
          
       - name: Rodar análise de código com SonarCloud
         if: github.ref == 'refs/heads/homologacao'
