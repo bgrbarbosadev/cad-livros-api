@@ -25,6 +25,6 @@ spring:
 sonar:
   host:
     url: https://sonarcloud.io
-  organization: ${SONAR_ORG:bgrbarbosa}
-  projectKey: ${SONAR_KEY:cad-livros}
-  token: ${SONAR_TOKEN:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}
+  organization: bgrbarbosa
+  projectKey: cad-livros-api
+  token: ${SONAR_TOKEN}
