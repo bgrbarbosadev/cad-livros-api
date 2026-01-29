@@ -40,5 +40,5 @@ sonar:
   host:
     url: https://sonarcloud.io
   organization: bgrbarbosa
-  projectKey: cad-livros
+  projectKey: cad-livros-api
   token: ${SONAR_TOKEN:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}
