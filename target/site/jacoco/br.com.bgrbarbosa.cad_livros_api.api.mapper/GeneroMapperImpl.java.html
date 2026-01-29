@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GeneroMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cad-livros-api</a> &gt; <a href="index.source.html" class="el_package">br.com.bgrbarbosa.cad_livros_api.api.mapper</a> &gt; <span class="el_source">GeneroMapperImpl.java</span></div><h1>GeneroMapperImpl.java</h1><pre class="source lang-java linenums">package br.com.bgrbarbosa.cad_livros_api.api.mapper;
+
+import br.com.bgrbarbosa.cad_livros_api.api.dto.GeneroDTO;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Genero;
+import br.com.bgrbarbosa.cad_livros_api.infraestruture.domain.Livro;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2026-01-28T14:29:37-0300&quot;,
+    comments = &quot;version: 1.6.0, compiler: javac, environment: Java 21.0.9 (Oracle Corporation)&quot;
+)
+@Component
+<span class="fc" id="L18">public class GeneroMapperImpl implements GeneroMapper {</span>
+
+    @Override
+    public Genero parseToEntity(GeneroDTO dto) {
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if ( dto == null ) {</span>
+<span class="nc" id="L23">            return null;</span>
+        }
+
+<span class="fc" id="L26">        Genero genero = new Genero();</span>
+
+<span class="fc" id="L28">        genero.setIdGenero( dto.idGenero() );</span>
+<span class="fc" id="L29">        genero.setDescGenero( dto.descGenero() );</span>
+<span class="fc" id="L30">        List&lt;Livro&gt; list = dto.livros();</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if ( list != null ) {</span>
+<span class="nc" id="L32">            genero.setLivros( new ArrayList&lt;Livro&gt;( list ) );</span>
+        }
+
+<span class="fc" id="L35">        return genero;</span>
+    }
+
+    @Override
+    public GeneroDTO parseToDto(Genero entity) {
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if ( entity == null ) {</span>
+<span class="nc" id="L41">            return null;</span>
+        }
+
+<span class="fc" id="L44">        UUID idGenero = null;</span>
+<span class="fc" id="L45">        String descGenero = null;</span>
+<span class="fc" id="L46">        List&lt;Livro&gt; livros = null;</span>
+
+<span class="fc" id="L48">        idGenero = entity.getIdGenero();</span>
+<span class="fc" id="L49">        descGenero = entity.getDescGenero();</span>
+<span class="fc" id="L50">        List&lt;Livro&gt; list = entity.getLivros();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if ( list != null ) {</span>
+<span class="fc" id="L52">            livros = new ArrayList&lt;Livro&gt;( list );</span>
+        }
+
+<span class="fc" id="L55">        GeneroDTO generoDTO = new GeneroDTO( idGenero, descGenero, livros );</span>
+
+<span class="fc" id="L57">        return generoDTO;</span>
+    }
+
+    @Override
+    public List&lt;GeneroDTO&gt; parseToListDTO(List&lt;Genero&gt; list) {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if ( list == null ) {</span>
+<span class="nc" id="L63">            return null;</span>
+        }
+
+<span class="fc" id="L66">        List&lt;GeneroDTO&gt; list1 = new ArrayList&lt;GeneroDTO&gt;( list.size() );</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for ( Genero genero : list ) {</span>
+<span class="fc" id="L68">            list1.add( parseToDto( genero ) );</span>
+<span class="fc" id="L69">        }</span>
+
+<span class="fc" id="L71">        return list1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

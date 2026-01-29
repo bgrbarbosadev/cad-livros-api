@@ -1,0 +1,44 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: cad-livros-api
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:example}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  security:
+    jwt:
+      secret: ${JWT_SECRET:test-secret-key-123}
+      with_issuer: ${WITH_ISSUER:myapp}
+
+logging:
+  pattern:
+    console: '%clr(%d{dd-MM-yyyy HH:mm:ss}){faint} %clr(%5p) %clr([%t]){faint} %clr(%-40.40logger){cyan} %clr(:){yellow} %m%n'
+  level:
+    root: info
+    br.com.bgrbarbosa.cad-livros-api: info
+
+owasp:
+  key: ${OWASP_NVD_KEY:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}
+
+sonar:
+  host:
+    url: https://sonarcloud.io
+  organization: bgrbarbosa
+  projectKey: cad-livros-api
+  token: ${SONAR_TOKEN:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}

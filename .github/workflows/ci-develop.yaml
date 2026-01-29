@@ -1,0 +1,61 @@
+name: Java CI com Maven, Docker e AWS
+on:
+  push:
+    branches: [ "main", "homologacao" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: cad-livros-api
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+#      - name: Rodar análise de vulnerabilidade com OWASP
+#        if: github.ref == 'refs/heads/homologacao'
+#        env:
+#          OWASP_NVD_KEY: ${{ secrets.OWASP_NVD_KEY }}
+#        run: mvn clean install -Powasp -DskipTests -Dowasp.key=${{ secrets.OWASP_NVD_KEY }}
+         
+      - name: Rodar análise de código com SonarCloud
+        if: github.ref == 'refs/heads/homologacao'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          DATASOURCE_URL: jdbc:h2:mem:testdb
+          DATASOURCE_USERNAME: sa
+          DATASOURCE_PASSWORD: ""
+          JWT_SECRET: "minhachavesecreta@123"
+          WITH_ISSUER: "myapp"
+        run: mvn verify sonar:sonar -Psonar-cloud -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+
+      - name: Configurar Credenciais AWS
+        if: github.ref == 'refs/heads/main'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy no Elastic Beanstalk
+        if: github.ref == 'refs/heads/main'
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: "CAD-Livros-API"
+          environment_name: "cad-livros-api"
+          region: ${{ secrets.AWS_REGION }}
+          deployment_package: target/cad-livros-api-1.0.0.jar
+
+          version_label: "cad-livros-v1-run${{ github.run_number }}-${{ github.sha }}"
+
+          use_existing_version_if_available: true
+          wait_for_deployment: true
