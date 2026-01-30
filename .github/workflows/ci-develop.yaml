@@ -19,11 +19,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-#      - name: Rodar análise de vulnerabilidade com OWASP
-#        if: github.ref == 'refs/heads/homologacao'
-#        env:
-#          OWASP_NVD_KEY: ${{ secrets.OWASP_NVD_KEY }}
-#        run: mvn clean install -Powasp -DskipTests -Dowasp.key=${{ secrets.OWASP_NVD_KEY }}
+      - name: Rodar análise de vulnerabilidade com OWASP
+        if: github.ref == 'refs/heads/homologacao'
+        env:
+          OWASP_NVD_KEY: ${{ secrets.OWASP_NVD_KEY }}
+        run: mvn clean install -Powasp -DskipTests -Dowasp.key=${{ secrets.OWASP_NVD_KEY }}
          
       - name: Rodar análise de código com SonarCloud
         if: github.ref == 'refs/heads/homologacao'
@@ -43,7 +43,11 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
+          
+      - name: Criar build de pacote para deploy
+        if: github.ref == 'refs/heads/main'
+        run: mvn clean install -DskipTests
+      
       - name: Deploy no Elastic Beanstalk
         if: github.ref == 'refs/heads/main'
         uses: einaregilsson/beanstalk-deploy@v22

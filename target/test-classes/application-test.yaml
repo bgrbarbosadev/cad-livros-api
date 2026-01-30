@@ -22,3 +22,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+sonar:
+  host:
+    url: https://sonarcloud.io
+  organization: bgrbarbosa
+  projectKey: cad-livros-api
+  token: ${SONAR_TOKEN}

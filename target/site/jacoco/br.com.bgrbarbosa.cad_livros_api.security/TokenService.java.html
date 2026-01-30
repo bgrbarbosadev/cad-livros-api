@@ -18,10 +18,10 @@ import java.util.List;
 @Service
 <span class="fc" id="L19">public class TokenService {</span>
 
-    @Value(&quot;${security.jwt.secret:${JWT_SECRET}}&quot;)
+    @Value(&quot;${spring.security.jwt.secret}&quot;)
     private String secret;
 
-    @Value(&quot;${spring.security.jwt.with_issuer:${WITH_ISSUER}}&quot;)
+    @Value(&quot;${spring.security.jwt.with_issuer}&quot;)
     private String withIssuerkey;
 
     public UserResponseDTO generateToken(User user){
