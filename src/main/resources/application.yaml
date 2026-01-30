@@ -1,11 +1,13 @@
 server:
   port: ${PORT:8080}
-
+info:
+  app:
+    version: "@project.version@"
 spring:
   application:
     name: cad-livros-api
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/cad-livros}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:example}
     driver-class-name: org.postgresql.Driver
@@ -34,11 +36,11 @@ logging:
     br.com.bgrbarbosa.cad-livros-api: info
 
 owasp:
-  key: ${OWASP_NVD_KEY:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}
+  key: ${OWASP_NVD_KEY:Sua Chave Owasp Aqui}
 
 sonar:
   host:
     url: https://sonarcloud.io
   organization: bgrbarbosa
   projectKey: cad-livros-api
-  token: ${SONAR_TOKEN:sqp_5836249eb6a445cd12bd291985ee47cb4bf6ec8a}
+  token: ${SONAR_TOKEN:Seu Token Sonar Cloud Aqui}

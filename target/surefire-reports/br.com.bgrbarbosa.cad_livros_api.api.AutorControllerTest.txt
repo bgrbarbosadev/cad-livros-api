@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.bgrbarbosa.cad_livros_api.api.AutorControllerTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.380 s -- in br.com.bgrbarbosa.cad_livros_api.api.AutorControllerTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.43 s -- in br.com.bgrbarbosa.cad_livros_api.api.AutorControllerTest

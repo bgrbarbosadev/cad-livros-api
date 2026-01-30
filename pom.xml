@@ -9,7 +9,7 @@
 		<relativePath/> </parent>
 	<groupId>br.com.bgrbarbosa</groupId>
 	<artifactId>cad-livros-api</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>cad-livros-api</name>
 	<description>Cadastro de Livros</description>
 	<url/>
