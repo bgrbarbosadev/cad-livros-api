@@ -50,5 +50,5 @@ cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,GeneroController,0,88,0,0,0,
 cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,AutorController,0,88,0,0,0,14,0,6,0,6
 cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,LoginController,0,50,0,0,0,11,0,2,0,2
 cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,UserController,0,89,0,0,0,14,0,6,0,6
-cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,VersionController,3,3,0,0,1,1,1,1,1,1
+cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,VersionController,5,3,0,0,1,1,1,1,1,1
 cad-livros-api,br.com.bgrbarbosa.cad_livros_api.api,LivroController,0,88,0,0,0,14,0,6,0,6

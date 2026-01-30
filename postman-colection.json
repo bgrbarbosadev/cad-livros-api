@@ -1,0 +1,1085 @@
+{
+  "info": {
+    "_postman_id": "06cafa83-94b2-4158-a0f2-479b8b646388",
+    "name": "Cadastro de Livros",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16803873"
+  },
+  "item": [
+    {
+      "name": "Autor",
+      "item": [
+        {
+          "name": "Buscar Autores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/autor",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "autor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Usuario por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user/a683a2cc-c03d-47f0-9b41-1df1644450b2",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "a683a2cc-c03d-47f0-9b41-1df1644450b2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Autor Pageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/autor",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "autor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inserir Autor",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"nameAutor\": \"Augaegaegae\",\r\n        \"biografiaAutor\": \"Jogaegaegaegaegaegaegaegaegaegaegaegaegaegaeg\",\r\n        \"dtNascAutor\": \"20/06/1889\", \r\n        \"nacionalidadeAutor\": \"brasileira.\", \r\n        \"fotoAutor\": \"foto1\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/autor",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "autor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Autor",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idAutor\": \"a683a2cc-c03d-47f0-9b41-1df1644450b2\",\r\n    \"nameAutor\": \"Machado de Assis - alterado\",\r\n    \"biografiaAutor\": \"Joaquim Maria Machado de Assis foi um escritor brasileiro, amplamente reconhecido por críticos, estudiosos, escritores e leitores como o maior expoente da literatura brasileira.\",\r\n    \"dtNascAutor\": \"21-06-1839\",\r\n    \"nacionalidadeAutor\": \"brasileira.\",\r\n    \"fotoAutor\": \"foto1\",\r\n    \"livros\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/autor",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "autor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Autor por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/autor/0e4b7c14-6e99-4962-83f2-0d66c061dbf8",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "autor",
+                "0e4b7c14-6e99-4962-83f2-0d66c061dbf8"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Editora",
+      "item": [
+        {
+          "name": "Buscar Editoras",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/editora",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Editora por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/editora/a683a2cc-c03d-47f0-9b41-1df1644450b2",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora",
+                "a683a2cc-c03d-47f0-9b41-1df1644450b2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Editora Pageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/editora",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inserir Editora",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"cnpjEditora\": \"91486455000114\",\r\n        \"razaoSocialEditora\": \"teste de deleção\",\r\n        \"telEditora\": \"524924526987\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/editora",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Editora",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idEditora\": \"24925e55-37a3-437f-b31c-da57ecaaccb9\",\r\n    \"cnpjEditora\": \"91486455000114\",\r\n    \"razaoSocialEditora\": \"Editora Abril - atualizada\",\r\n    \"telEditora\": \"524924526987\",\r\n    \"livros\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/editora",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Editora por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/editora/19a1c1a7-3f8e-4b0a-a79e-f1962d85cf6c",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "editora",
+                "19a1c1a7-3f8e-4b0a-a79e-f1962d85cf6c"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Genero",
+      "item": [
+        {
+          "name": "Buscar Generos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/genero",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Genero por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/genero/a683a2cc-c03d-47f0-9b41-1df1644450b2",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero",
+                "a683a2cc-c03d-47f0-9b41-1df1644450b2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Genero Pageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/genero",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inserir Genero",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"descGenero\": \"teste para deleção\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/genero",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Genero",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idGenero\": \"a46dfffb-c4c9-4562-b9bc-5a22ebf82b13\",\r\n    \"descGenero\": \"Romance - alterado\",\r\n    \"livros\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/genero",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Genero",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/genero/8a36a640-916c-4cfb-96f3-19cbab11c3e6",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "genero",
+                "8a36a640-916c-4cfb-96f3-19cbab11c3e6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Livros",
+      "item": [
+        {
+          "name": "Buscar Livros",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/livro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Livro por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/livro/12a53a0d-f9c4-44a7-98bc-3cf6289a1ff6",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro",
+                "12a53a0d-f9c4-44a7-98bc-3cf6289a1ff6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Livro Pageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/livro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inserir Livro",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"tituloLivro\": \"Livro teste de inserção\",\r\n        \"isbn\": \"123456789-9\",\r\n        \"anoPublicacao\": \"20/07/2025\",\r\n        \"edicaoLivro\": \"Edicao 1\",\r\n        \"precoLivro\": 75.00,\r\n        \"autorLivro\": {\r\n            \"idAutor\":   \"30ad1602-8a1c-46ee-b838-124d5a366038\"\r\n        },\r\n        \"generoLivro\": {\r\n            \"idGenero\":  \"121707bf-be02-4da0-9d19-f36dac2eaf33\"\r\n        },\r\n        \"editoraLivro\": {\r\n            \"idEditora\": \"cbfbe7d2-4d3e-4290-8937-9e6a68b89658\"\r\n        }\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/livro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Livro",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"tituloLivro\": \"Livro teste de inserção - alterado\",\r\n        \"isbn\": \"123456789-9\",\r\n        \"anoPublicacao\": \"20/07/2025\",\r\n        \"edicaoLivro\": \"Edicao 1\",\r\n        \"precoLivro\": 75.00,\r\n        \"autorLivro\": {\r\n            \"idAutor\": \"649bb6d2-e8d6-4ed3-8975-cc3f65fecf0a\"  \r\n        },\r\n        \"generoLivro\": {\r\n            \"idGenero\": \"a46dfffb-c4c9-4562-b9bc-5a22ebf82b13\"\r\n        },\r\n        \"editoraLivro\": {\r\n            \"idEditora\": \"24925e55-37a3-437f-b31c-da57ecaaccb9\"\r\n        }\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/livro",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Livro",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/livro/db72de87-c603-48c3-9826-2cb09d81244d",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "livro",
+                "db72de87-c603-48c3-9826-2cb09d81244d"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"email\": \"admin@mail.com\",\r\n        \"password\": \"123456\"\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/login",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Buscar Usuarios",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar User por id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user/59fe8b12-d023-4788-af04-7d594c05cbb7",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "59fe8b12-d023-4788-af04-7d594c05cbb7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar User Pageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inserir User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "    {\r\n        \"firstName\": \"Teste\",\r\n        \"lastName\": \"Teste\",\r\n        \"email\": \"teste@mail.com\",\r\n        \"password\": \"$2a$12$hlflu.9xX3JCnQOsiLs3HuNMcxBhBAIP.BPOsrF.ryw5E9PGka79K\",\r\n        \"roles\": [\r\n            {\r\n                \"uuid\": \"886ba973-67ab-471e-8696-d466df9eb2c6\",\r\n                \"authority\": \"USER\"\r\n            }\r\n        ]\r\n    }\r\n    ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/user",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Usuarios",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"uuid\": \"467a59da-c180-4749-a1d4-e7246c2a18e2\",\r\n    \"firstName\": \"Teste Alterado\",\r\n    \"lastName\": \"Teste Atelrado\",\r\n    \"email\": \"teste@mail.com\",\r\n    \"password\": \"$2a$10$td6Y9k.23./5Z8QOHOys5OZ.uCR0FcudgPosjgnUdkjsn.phptmGe\",\r\n    \"roles\": [\r\n        {\r\n            \"uuid\": \"886ba973-67ab-471e-8696-d466df9eb2c6\",\r\n            \"authority\": \"USER\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v1/user",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Usuarios",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Token_Access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v1/user/467a59da-c180-4749-a1d4-e7246c2a18e1",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "467a59da-c180-4749-a1d4-e7246c2a18e1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "teste",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host_prod}}/swagger-ui/index.html",
+          "host": [
+            "{{host_prod}}"
+          ],
+          "path": [
+            "swagger-ui",
+            "index.html"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Teste API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host_local}}/api/v1/version",
+          "host": [
+            "{{host_local}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "version"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "host",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
